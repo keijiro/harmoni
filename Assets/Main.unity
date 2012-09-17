@@ -294,7 +294,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -352,14 +352,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063fb88c6ae04433fa81ee0ada147341, type: 3}
   m_Name: 
   bpm: 80
-  volume: .699999988
-  stereo: .300000012
-  fm_mul: 1
-  fm_mod: 0
+  volume: .349999994
+  stereo: .5
+  fm_mul: 8
+  fm_mod: .0399999991
   env_atk: .00300000003
   env_rel: .200000003
   bit_int: 4
-  bit_mix: 1
+  bit_mix: .200000003
 --- !u!168 &652960826
 AudioEchoFilter:
   m_ObjectHideFlags: 0
@@ -367,7 +367,7 @@ AudioEchoFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 652960822}
   m_Enabled: 1
-  m_Delay: 180
+  m_Delay: 140
   m_DecayRatio: .75
   m_WetMix: .300000012
   m_DryMix: 1
