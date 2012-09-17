@@ -22,7 +22,7 @@ class SynthModule {
     }
 
     function Run() {
-        var level = bit.Run(osc.Run() * env.current);
+        var level = bit.Run(osc.Run() * env.GetLevel());
         env.Update();
         return level;
     }
@@ -44,9 +44,11 @@ function KeyOn(note : int, env : Envelope) {
     switcher = (switcher + 1) & 1;
     var module = modules[switcher];
 
-    module.env = env;
+    module.env = Envelope(env);
     module.osc.SetNote(note);
-    env.KeyOn();
+    module.env.KeyOn();
+
+    return module.env;
 }
 
 function OnAudioFilterRead(data : float[], channels : int) {

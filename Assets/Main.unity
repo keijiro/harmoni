@@ -265,8 +265,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 652960823}
   - 82: {fileID: 652960824}
-  - 114: {fileID: 652960825}
   - 114: {fileID: 652960829}
+  - 114: {fileID: 652960825}
   - 114: {fileID: 652960827}
   - 166: {fileID: 652960828}
   - 168: {fileID: 652960826}
@@ -354,9 +354,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 063fb88c6ae04433fa81ee0ada147341, type: 3}
   m_Name: 
-  bpm: 80
-  env_atk: .00300000003
-  env_rel: .200000003
+  interval: 16
+  env_atk: .0799999982
+  env_rel: .140000001
 --- !u!168 &652960826
 AudioEchoFilter:
   m_ObjectHideFlags: 0

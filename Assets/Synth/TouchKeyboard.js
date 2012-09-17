@@ -7,25 +7,21 @@
 
 private var synth : SynthController;
 private var scale = MusicalScale(41);
-private var envelopes = [Envelope(), Envelope()];
-private var switcher = 0;
+private var envelope = Envelope();
 
 function Start() {
     synth = GetComponent.<SynthController>();
-    for (var env in envelopes) env.sustain = true;
+    envelope.sustain = true;
 }
 
 function Update() {
-    for (var env in envelopes) {
-        env.attack = env_atk;
-        env.release = env_rel;
-    }
+    envelope.attack = env_atk;
+    envelope.release = env_rel;
     if (Input.GetMouseButtonDown(0)) {
-        switcher = (switcher + 1) & 1;
         var note = scale.GetNote(32 * Input.mousePosition.y / Screen.height);
-        synth.KeyOn(note, envelopes[switcher]);
+        envelope = synth.KeyOn(note, envelope);
     }
     if (Input.GetMouseButtonUp(0)) {
-        envelopes[switcher].KeyOff();
+        envelope.KeyOff();
     }
 }
