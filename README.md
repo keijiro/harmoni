@@ -1,4 +1,4 @@
-unity-ubik
-==========
+harmoni
+=======
 
-An audio visual experimental project.
+Synthesizer app made with Unity
