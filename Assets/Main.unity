@@ -266,6 +266,7 @@ GameObject:
   - 4: {fileID: 652960823}
   - 82: {fileID: 652960824}
   - 114: {fileID: 652960825}
+  - 114: {fileID: 652960829}
   - 114: {fileID: 652960827}
   - 166: {fileID: 652960828}
   - 168: {fileID: 652960826}
@@ -349,19 +350,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 652960822}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 063fb88c6ae04433fa81ee0ada147341, type: 3}
   m_Name: 
   bpm: 80
-  volume: .349999994
-  stereo: .5
-  fm_mul: 8
-  fm_mod: .0399999991
   env_atk: .00300000003
   env_rel: .200000003
-  bit_int: 4
-  bit_mix: .200000003
 --- !u!168 &652960826
 AudioEchoFilter:
   m_ObjectHideFlags: 0
@@ -383,15 +378,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b39358e81614468183e770aa7ed16f4, type: 3}
   m_Name: 
-  bpm: 80
-  volume: .5
-  stereo: .300000012
-  fm_mul: 4
-  fm_mod: .0799999982
   env_atk: 1
   env_rel: 1
-  bit_int: 4
-  bit_mix: .370000005
 --- !u!166 &652960828
 AudioChorusFilter:
   m_ObjectHideFlags: 0
@@ -407,3 +395,19 @@ AudioChorusFilter:
   m_Rate: .800000012
   m_Depth: .0299999993
   m_FeedBack: 0
+--- !u!114 &652960829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 652960822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0caab919dd68c4630a6604d818e66aa0, type: 3}
+  m_Name: 
+  volume: .5
+  stereo: .5
+  fm_mul: 8
+  fm_mod: .0799999982
+  bit_int: 3
+  bit_mix: .200000003

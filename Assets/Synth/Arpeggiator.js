@@ -17,7 +17,8 @@ class Arpeggiator {
     }
 
     function SetBpm(bpm : int) {
-        delta = 4.0 * bpm / (SynthConfig.kSampleRate * 60);
+//        delta = 4.0 * bpm / (SynthConfig.kSampleRate * 60);
+        delta = 4.0 * bpm / (60 * 60);
     }
 
     function Run() {
