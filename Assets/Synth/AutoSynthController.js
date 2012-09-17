@@ -47,7 +47,7 @@ class ASynth {
     function Run() {
         if (arp.Run()) {
             osc.SetNote(arp.currentNote);
-            env.Bang();
+            env.KeyOn();
         }
         var x = bit.Run(amp.Run(osc.Run()));
         env.Update();
