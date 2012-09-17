@@ -8,6 +8,7 @@ var interval = 4;
 @Range(0.003, 1.0)  var env_rel = 0.2;
 
 private var synth : SynthController;
+private var noise : NoiseController;
 private var envelope = Envelope();
 private var scale = MusicalScale(41 + 12 * 3);
 private var time = 0.0;
@@ -15,6 +16,7 @@ private var touch = 2.0;
 
 function Start() {
     synth = GetComponent.<SynthController>();
+    noise = FindObjectOfType(NoiseController);
 
     var prevNote = -1;
 
@@ -32,6 +34,7 @@ function Start() {
                 prevNote = note;
             }
 
+            noise.KeyOn(envelope.amplifier);
             time += 0.1713;
 
             yield WaitForSeconds(1.0 / 60 * interval);

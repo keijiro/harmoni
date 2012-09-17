@@ -139,10 +139,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c64c6d40ec8541feb23637107a3d167, type: 3}
   m_Name: 
-  speed: .100000001
+  speed: .0299999993
+  speedKeyAdd: .209999993
   pitch: 57
-  amp: 1
-  vertical: 0
+  amp: .699999988
+  ampKeyAdd: .400000006
   freq: 1
 --- !u!114 &158817885
 MonoBehaviour:
