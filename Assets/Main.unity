@@ -251,10 +251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a447fe9c9f904394ad76d7b3025f4b2, type: 3}
   m_Name: 
   vignetteIntensity: 2.4000001
-  blurAmount: .49000001
-  blurSpread: 3.82999992
+  blurAmount: .699999988
+  blurSpread: 1.90999997
   noiseIntensity: .219999999
-  noiseScale: .620000005
+  noiseScale: .699999988
   shader: {fileID: 4800000, guid: 1f31e1939a6d94f90af6a748b12ffac1, type: 3}
   noiseTexture: {fileID: 2800000, guid: ffa9c02760c2b4e8eb9814ec06c4b05b, type: 3}
 --- !u!1 &652960822
