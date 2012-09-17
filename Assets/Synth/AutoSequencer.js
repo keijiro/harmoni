@@ -2,7 +2,8 @@
 
 @script RequireComponent(SynthController)
 
-@Range(1, 32)  var interval = 4;
+var interval = 4;
+
 @Range(0.003, 1.0)  var env_atk = 0.003;
 @Range(0.003, 1.0)  var env_rel = 0.2;
 

@@ -44,7 +44,7 @@ function KeyOn(note : int, env : Envelope) {
     switcher = (switcher + 1) & 1;
     var module = modules[switcher];
 
-    module.env = Envelope(env);
+    module.env = Envelope(env, module.env.current);
     module.osc.SetNote(note);
     module.env.KeyOn();
 

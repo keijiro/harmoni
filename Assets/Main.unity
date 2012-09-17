@@ -269,6 +269,7 @@ GameObject:
   - 114: {fileID: 652960825}
   - 114: {fileID: 652960827}
   - 166: {fileID: 652960828}
+  - 164: {fileID: 652960830}
   - 168: {fileID: 652960826}
   m_Layer: 0
   m_Name: Synth
@@ -365,7 +366,7 @@ AudioEchoFilter:
   m_GameObject: {fileID: 652960822}
   m_Enabled: 1
   m_Delay: 140
-  m_DecayRatio: .75
+  m_DecayRatio: .400000006
   m_WetMix: .300000012
   m_DryMix: 1
 --- !u!114 &652960827
@@ -411,3 +412,26 @@ MonoBehaviour:
   fm_mod: .0799999982
   bit_int: 3
   bit_mix: .200000003
+--- !u!164 &652960830
+AudioReverbFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 652960822}
+  m_Enabled: 1
+  m_DryLevel: 0
+  m_Room: -130
+  m_RoomHF: -100
+  m_RoomRolloff: 0
+  m_DecayTime: 2.79999995
+  m_DecayHFRatio: .829999983
+  m_ReflectionsLevel: -700
+  m_ReverbLevel: 430
+  m_ReverbDelay: .0500000007
+  m_Diffusion: 100
+  m_Density: 100
+  m_HFReference: 5000
+  m_RoomLF: 0
+  m_LFReference: 250
+  m_ReflectionsDelay: .0900000036
+  m_ReverbPreset: 27

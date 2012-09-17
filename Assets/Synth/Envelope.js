@@ -12,9 +12,10 @@ class Envelope {
     function Envelope() {
     }
 
-    function Envelope(src : Envelope) {
+    function Envelope(src : Envelope, init : float) {
         attack = src.attack;
         release = src.release;
+        current = init;
         sustain = src.sustain;
         amplifier = src.amplifier;
     }
