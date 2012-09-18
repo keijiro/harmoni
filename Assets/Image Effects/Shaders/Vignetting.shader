@@ -2,9 +2,83 @@ Shader "Hidden/Vignetting" {
 	Properties {
 		_MainTex ("Base", 2D) = "" {}
 	}
-
 	Subshader {
+		// Downsampling pass
+		Pass {
+			Cull Off
+			ZTest Always
+			ZWrite Off
+			Fog { Mode off }
 
+			GLSLPROGRAM
+
+			uniform sampler2D _MainTex;
+			uniform vec2 _MainTex_TexelSize;
+			varying lowp vec2 uv[4];
+
+			#ifdef VERTEX
+			void main() {
+	            gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+	            float dx = _MainTex_TexelSize.x;
+	            float dy = _MainTex_TexelSize.y;
+				uv[0] = gl_MultiTexCoord0.xy + vec2(-dx, -dy);
+				uv[1] = gl_MultiTexCoord0.xy + vec2(-dx,  dy);
+				uv[2] = gl_MultiTexCoord0.xy + vec2( dx, -dy);
+				uv[3] = gl_MultiTexCoord0.xy + vec2( dx,  dy);
+			}
+			#endif
+
+			#ifdef FRAGMENT
+			void main() {
+				gl_FragColor =
+					0.25 * texture2D(_MainTex, uv[0]) +
+					0.25 * texture2D(_MainTex, uv[1]) +
+					0.25 * texture2D(_MainTex, uv[2]) +
+					0.25 * texture2D(_MainTex, uv[3]);
+			}
+			#endif
+
+			ENDGLSL
+		}
+		// Blur pass
+		Pass {
+			Cull Off
+			ZTest Always
+			ZWrite Off
+			Fog { Mode off }
+
+			GLSLPROGRAM
+
+			uniform sampler2D _MainTex;
+			uniform vec4 offsets;
+			varying vec2 uv;
+			varying vec4 delta[3];
+
+			#ifdef VERTEX
+			void main() {
+	            gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+				uv = gl_MultiTexCoord0.xy;
+				delta[0] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(1, 1, -1, -1);
+				delta[1] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(2, 2, -2, -2);
+				delta[2] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(3, 3, -3, -3);
+			}
+			#endif
+
+			#ifdef FRAGMENT
+			void main() {
+				gl_FragColor =
+					0.4  * texture2D(_MainTex, uv) +
+					0.15 * texture2D(_MainTex, delta[0].xy) +
+					0.15 * texture2D(_MainTex, delta[0].zw) +
+					0.1  * texture2D(_MainTex, delta[1].xy) +
+					0.1  * texture2D(_MainTex, delta[1].zw) +
+					0.05 * texture2D(_MainTex, delta[2].xy) +
+					0.05 * texture2D(_MainTex, delta[2].zw);
+			}
+			#endif
+
+			ENDGLSL
+		}
 		// Vignetting pass
 		Pass {
 			Cull Off
@@ -47,84 +121,6 @@ Shader "Hidden/Vignetting" {
 				noise = (noise * 2.0 - 1.0) * noise_intensity;
 
 				gl_FragColor = mix(source, blur, min(blur_amount * coord2, 1.0)) * mask + noise;
-			}
-			#endif
-
-			ENDGLSL
-		}
-
-		// Blur pass
-		Pass {
-			Cull Off
-			ZTest Always
-			ZWrite Off
-			Fog { Mode off }
-
-			GLSLPROGRAM
-
-			uniform sampler2D _MainTex;
-			uniform vec4 offsets;
-			varying vec2 uv;
-			varying vec4 delta[3];
-
-			#ifdef VERTEX
-			void main() {
-	            gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-				uv = gl_MultiTexCoord0.xy;
-				delta[0] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(1, 1, -1, -1);
-				delta[1] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(2, 2, -2, -2);
-				delta[2] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(3, 3, -3, -3);
-			}
-			#endif
-
-			#ifdef FRAGMENT
-			void main() {
-				gl_FragColor =
-					0.4  * texture2D(_MainTex, uv) +
-					0.15 * texture2D(_MainTex, delta[0].xy) +
-					0.15 * texture2D(_MainTex, delta[0].zw) +
-					0.1  * texture2D(_MainTex, delta[1].xy) +
-					0.1  * texture2D(_MainTex, delta[1].zw) +
-					0.05 * texture2D(_MainTex, delta[2].xy) +
-					0.05 * texture2D(_MainTex, delta[2].zw);
-			}
-			#endif
-
-			ENDGLSL
-		}
-
-		// Downsampling pass
-		Pass {
-			Cull Off
-			ZTest Always
-			ZWrite Off
-			Fog { Mode off }
-
-			GLSLPROGRAM
-
-			uniform sampler2D _MainTex;
-			uniform vec2 _MainTex_TexelSize;
-			varying lowp vec2 uv[4];
-
-			#ifdef VERTEX
-			void main() {
-	            gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-	            float dx = _MainTex_TexelSize.x;
-	            float dy = _MainTex_TexelSize.y;
-				uv[0] = gl_MultiTexCoord0.xy + vec2(-dx, -dy);
-				uv[1] = gl_MultiTexCoord0.xy + vec2(-dx,  dy);
-				uv[2] = gl_MultiTexCoord0.xy + vec2( dx, -dy);
-				uv[3] = gl_MultiTexCoord0.xy + vec2( dx,  dy);
-			}
-			#endif
-
-			#ifdef FRAGMENT
-			void main() {
-				gl_FragColor = 0.25 * (
-					texture2D(_MainTex, uv[0]) +
-					texture2D(_MainTex, uv[1]) +
-					texture2D(_MainTex, uv[2]) +
-					texture2D(_MainTex, uv[3]));
 			}
 			#endif
 

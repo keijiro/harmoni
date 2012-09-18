@@ -41,7 +41,7 @@ class Vignetting extends PostEffectsBase {
         var quarter1 = RenderTexture.GetTemporary(source.width / 4, source.height / 4, 0);
         var quarter2 = RenderTexture.GetTemporary(source.width / 4, source.height / 4, 0);
 
-        Graphics.Blit(source, quarter1, material, 2);
+        Graphics.Blit(source, quarter1, material, 0);
 
         material.SetVector("offsets", Vector4(0, bdy, 0, 0));
         Graphics.Blit(quarter1, quarter2, material, 1);
@@ -54,7 +54,7 @@ class Vignetting extends PostEffectsBase {
         material.SetFloat("vignette_intensity", vignetteIntensity);
         material.SetFloat("noise_intensity", noiseIntensity * Random.Range(0.9, 1.0));
         material.SetFloat("blur_amount", blurAmount);
-        Graphics.Blit(source, destination, material, 0);
+        Graphics.Blit(source, destination, material, 2);
         
         RenderTexture.ReleaseTemporary(quarter1);    
         RenderTexture.ReleaseTemporary(quarter2);  
