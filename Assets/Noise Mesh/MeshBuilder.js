@@ -6,44 +6,15 @@
 @Range(1, 10)	var lengthV = 1.0;
 @Range(0, 2)	var meshType = 0;
 
-private var prevSectionsU = 0;
-private var prevSectionsV = 0;
-private var prevLengthU = 1.0;
-private var prevLengthV = 1.0;
-private var prevMeshType = -1;
-
-function Update() {
-	if (CheckChanges()) BuildMesh();
-}
-
-private function CheckChanges() {
-	var modified =
-		sectionsU != prevSectionsU ||
-		sectionsV != prevSectionsV ||
-		lengthU != prevLengthU ||
-		lengthV != prevLengthV ||
-		prevMeshType != meshType;
-
-	prevSectionsU = sectionsU;
-	prevSectionsV = sectionsV;
-	prevLengthU = lengthU;
-	prevLengthV = lengthV;
-	prevMeshType = meshType;
-
-	return modified;
-}
-
-private function BuildMesh() {
+function Awake() {
 	var mesh = Mesh();
 	mesh.vertices = MakeVertices();
 	mesh.normals = MakeNormals();
 	mesh.tangents = MakeTangents();
     mesh.SetIndices(MakeIndexArray(), MeshTopology.LineStrip, 0);
     mesh.RecalculateBounds();
-
-	var meshFilter = GetComponent.<MeshFilter>();
-	if (meshFilter.mesh) Destroy(meshFilter.mesh);
-    meshFilter.mesh = mesh;
+	mesh.Optimize();
+	GetComponent.<MeshFilter>().mesh = mesh;
 }
 
 private function MakeNormals() {
