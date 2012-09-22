@@ -12,6 +12,8 @@ PlayerSettings:
   accelerometerFrequency: 0
   companyName: Radium Software
   productName: Harmoni
+  defaultCursor: {fileID: 0}
+  cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
@@ -77,17 +79,22 @@ PlayerSettings:
   StripUnusedMeshComponents: 0
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 16
-  uIPrerenderedIcon: 0
+  uIPrerenderedIcon: 1
   uIRequiresPersistentWiFi: 0
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 0}
-  iPhoneHighResSplashScreen: {fileID: 0}
-  iPadPortraitSplashScreen: {fileID: 0}
-  iPadHighResPortraitSplashScreen: {fileID: 0}
-  iPadLandscapeSplashScreen: {fileID: 0}
-  iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iPhoneSplashScreen: {fileID: 2800000, guid: efdce04b4991e4883885512a0db421b5, type: 3}
+  iPhoneHighResSplashScreen: {fileID: 2800000, guid: efdce04b4991e4883885512a0db421b5,
+    type: 3}
+  iPadPortraitSplashScreen: {fileID: 2800000, guid: 7420e4486d3134943ab58b9fdc493054,
+    type: 3}
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 7420e4486d3134943ab58b9fdc493054,
+    type: 3}
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: cdbb6320ec9c844b79f815578c835625,
+    type: 3}
+  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: cdbb6320ec9c844b79f815578c835625,
+    type: 3}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   AndroidKeystoreName: 
@@ -98,6 +105,16 @@ PlayerSettings:
     m_Icons:
     - m_Icon: {fileID: 0}
       m_Size: 128
+  - m_BuildTarget: iPhone
+    m_Icons:
+    - m_Icon: {fileID: 2800000, guid: e117d05d92dbc428695fd22c1f404c9a, type: 3}
+      m_Size: 144
+    - m_Icon: {fileID: 2800000, guid: 03819861537514376b116f46a8d82cd4, type: 3}
+      m_Size: 114
+    - m_Icon: {fileID: 2800000, guid: e117d05d92dbc428695fd22c1f404c9a, type: 3}
+      m_Size: 72
+    - m_Icon: {fileID: 2800000, guid: 03819861537514376b116f46a8d82cd4, type: 3}
+      m_Size: 57
   m_BuildTargetBatching: []
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
@@ -134,6 +151,25 @@ PlayerSettings:
   ps3TrialMode: 0
   flashStrippingLevel: 2
   scriptingDefineSymbols: {}
+  metroPackageName: 
+  metroPackageLogo: 
+  metroPackageVersion: 
+  metroCertificatePath: 
+  metroCertificatePassword: 
+  metroCertificateSubject: 
+  metroCertificateIssuer: 
+  metroCertificateNotAfter: 0000000000000000
+  metroApplicationDescription: 
+  metroTileLogo: 
+  metroTileWideLogo: 
+  metroTileSmallLogo: 
+  metroTileShortName: 
+  metroTileShowName: 0
+  metroTileForegroundText: 1
+  metroTileBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  metroSplashScreenImage: 
+  metroSplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  metroSplashScreenUseBackgroundColor: 0
   firstStreamedLevelWithResources: 0
   unityRebuildLibraryVersion: 9
   unityForwardCompatibleVersion: 37
