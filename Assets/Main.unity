@@ -82,6 +82,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 158817880}
+  - 114: {fileID: 158817881}
   - 114: {fileID: 158817885}
   - 114: {fileID: 158817884}
   - 33: {fileID: 158817882}
@@ -104,6 +105,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &158817881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 158817879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8c256e48b8a46b48162836c2fb87e1, type: 3}
+  m_Name: 
+  assignedQualityLevels: 00000000
+  sectionsU: 26
+  sectionsV: 26
+  lengthU: 1.10000002
+  lengthV: 1
+  meshType: 0
 --- !u!33 &158817882
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -155,6 +172,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b8c256e48b8a46b48162836c2fb87e1, type: 3}
   m_Name: 
+  assignedQualityLevels: 01000000020000000300000004000000
   sectionsU: 55
   sectionsV: 45
   lengthU: 1.10000002

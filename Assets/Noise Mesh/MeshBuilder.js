@@ -1,20 +1,27 @@
 #pragma strict
 
-@Range(2, 256)	var sectionsU = 32;
-@Range(2, 265)	var sectionsV = 32;
+var assignedQualityLevels = [0, 1, 2, 3, 4, 5];
+
+@Range(2, 256)	var sectionsU = 46;
+@Range(2, 265)	var sectionsV = 46;
 @Range(1, 10)	var lengthU = 1.0;
 @Range(1, 10)	var lengthV = 1.0;
 @Range(0, 2)	var meshType = 0;
 
 function Awake() {
-	var mesh = Mesh();
-	mesh.vertices = MakeVertices();
-	mesh.normals = MakeNormals();
-	mesh.tangents = MakeTangents();
-    mesh.SetIndices(MakeIndexArray(), MeshTopology.LineStrip, 0);
-    mesh.RecalculateBounds();
-	mesh.Optimize();
-	GetComponent.<MeshFilter>().mesh = mesh;
+	for (var level in assignedQualityLevels) {
+		if (level == QualitySettings.GetQualityLevel()) {
+			var mesh = Mesh();
+			mesh.vertices = MakeVertices();
+			mesh.normals = MakeNormals();
+			mesh.tangents = MakeTangents();
+		    mesh.SetIndices(MakeIndexArray(), MeshTopology.LineStrip, 0);
+		    mesh.RecalculateBounds();
+			mesh.Optimize();
+			GetComponent.<MeshFilter>().mesh = mesh;
+			break;
+		}
+	}
 }
 
 private function MakeNormals() {

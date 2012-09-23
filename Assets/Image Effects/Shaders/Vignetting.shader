@@ -79,7 +79,7 @@ Shader "Hidden/Vignetting" {
 
 			ENDGLSL
 		}
-		// Vignetting pass
+		// Vignetting (heavy) pass
 		Pass {
 			Cull Off
 			ZTest Off
@@ -120,6 +120,50 @@ Shader "Hidden/Vignetting" {
 
 				gl_FragColor =
 					mix(source, blur, min(blur_amount * grad, 1.0)) * (1.0 - grad * vignette_intensity) +
+					vec4(noise, noise, noise, noise);
+			}
+			#endif
+
+			ENDGLSL
+		}
+		// Vignetting (light) pass
+		Pass {
+			Cull Off
+			ZTest Off
+			ZWrite Off
+			Fog { Mode off }
+
+			GLSLPROGRAM
+
+			uniform sampler2D _MainTex;
+
+			uniform sampler2D noise_texture;
+			uniform sampler2D grad_texture;
+
+			uniform vec4 noise_uvmod;
+			uniform lowp float vignette_intensity;
+			uniform lowp float noise_intensity;
+
+			varying lowp vec2 uv[2];
+
+			#ifdef VERTEX
+			void main() {
+	            gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+				uv[0] = gl_MultiTexCoord0.xy;
+				uv[1] = gl_MultiTexCoord0.xy * noise_uvmod.zw + noise_uvmod.xy;
+			}
+			#endif
+
+			#ifdef FRAGMENT
+			void main() {
+				lowp vec4 source = texture2D(_MainTex, uv[0]);
+				lowp float grad = texture2D(grad_texture, uv[0]).w;
+				lowp float noise = texture2D(noise_texture, uv[1]).w;
+
+				noise = (noise - 0.5) * noise_intensity;
+
+				gl_FragColor =
+					source * (1.0 - grad * vignette_intensity) +
 					vec4(noise, noise, noise, noise);
 			}
 			#endif

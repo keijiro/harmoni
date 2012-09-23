@@ -29,6 +29,8 @@ class Vignetting extends PostEffectsBase {
             return;
         }
 
+        var highQuality = QualitySettings.GetQualityLevel() > 1;
+
         var bdx = blurSpread * source.height / (512 * source.width);
         var bdy = blurSpread / 512;
 
@@ -39,26 +41,34 @@ class Vignetting extends PostEffectsBase {
             noiseScale * Screen.height / noiseTexture.height
         );
 
-        var quarter1 = RenderTexture.GetTemporary(source.width / 4, source.height / 4, 0);
-        var quarter2 = RenderTexture.GetTemporary(source.width / 4, source.height / 4, 0);
+        if (highQuality) {
+            var quarter1 = RenderTexture.GetTemporary(source.width / 4, source.height / 4, 0);
+            var quarter2 = RenderTexture.GetTemporary(source.width / 4, source.height / 4, 0);
 
-        Graphics.Blit(source, quarter1, material, 0);
+            Graphics.Blit(source, quarter1, material, 0);
 
-        material.SetVector("offsets", Vector4(0, bdy, 0, 0));
-        Graphics.Blit(quarter1, quarter2, material, 1);
-        material.SetVector("offsets", Vector4(bdx, 0, 0, 0));
-        Graphics.Blit(quarter2, quarter1, material, 1);
+            material.SetVector("offsets", Vector4(0, bdy, 0, 0));
+            Graphics.Blit(quarter1, quarter2, material, 1);
+            material.SetVector("offsets", Vector4(bdx, 0, 0, 0));
+            Graphics.Blit(quarter2, quarter1, material, 1);
+        }
 
-        material.SetTexture("blur_texture", quarter1);
         material.SetTexture("grad_texture", gradTexture);
         material.SetTexture("noise_texture", noiseTexture);
         material.SetVector("noise_uvmod", uvmod);
         material.SetFloat("vignette_intensity", vignetteIntensity);
         material.SetFloat("noise_intensity", noiseIntensity * Random.Range(0.9, 1.0));
-        material.SetFloat("blur_amount", blurAmount);
-        Graphics.Blit(source, destination, material, 2);
+
+        if (highQuality) {
+            material.SetTexture("blur_texture", quarter1);
+            material.SetFloat("blur_amount", blurAmount);
+        }
+
+        Graphics.Blit(source, destination, material, highQuality ? 2 : 3);
         
-        RenderTexture.ReleaseTemporary(quarter1);    
-        RenderTexture.ReleaseTemporary(quarter2);  
+        if (highQuality) {
+            RenderTexture.ReleaseTemporary(quarter1);    
+            RenderTexture.ReleaseTemporary(quarter2);  
+        }
     }
 }
