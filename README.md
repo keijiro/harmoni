@@ -8,8 +8,8 @@ Features
 --------
 
 - High-quality monophonic FM synthsizer.
-- Auto pitch adjustment (musical scale).
-- Algorithmic composition based on fBm (Fractional Brownian Motion) function.
+- Touch screen virtual keyboard.
+- Algorithmic composition based on fBm (Fractional Brownian Motion).
 - Fractal wave visualizer.
 - Beautiful visual effects.
 - Free and ad-free.
