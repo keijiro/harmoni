@@ -6,7 +6,7 @@ Shader "Hidden/Vignetting" {
 		// Downsampling pass
 		Pass {
 			Cull Off
-			ZTest Always
+			ZTest Off
 			ZWrite Off
 			Fog { Mode off }
 
@@ -43,7 +43,7 @@ Shader "Hidden/Vignetting" {
 		// Blur pass
 		Pass {
 			Cull Off
-			ZTest Always
+			ZTest Off
 			ZWrite Off
 			Fog { Mode off }
 
@@ -82,7 +82,7 @@ Shader "Hidden/Vignetting" {
 		// Vignetting pass
 		Pass {
 			Cull Off
-			ZTest Always
+			ZTest Off
 			ZWrite Off
 			Fog { Mode off }
 
@@ -92,6 +92,7 @@ Shader "Hidden/Vignetting" {
 
 			uniform sampler2D blur_texture;
 			uniform sampler2D noise_texture;
+			uniform sampler2D grad_texture;
 
 			uniform vec4 noise_uvmod;
 			uniform lowp float vignette_intensity;
@@ -112,15 +113,14 @@ Shader "Hidden/Vignetting" {
 			void main() {
 				lowp vec4 source = texture2D(_MainTex, uv[0]);
 				lowp vec4 blur = texture2D(blur_texture, uv[0]);
-				lowp vec4 noise = texture2D(noise_texture, uv[1]).wwww;
+				lowp float grad = texture2D(grad_texture, uv[0]).w;
+				lowp float noise = texture2D(noise_texture, uv[1]).w;
 
-				vec2 coord = (uv[0] - 0.5) * 2.0;
-				lowp float coord2 = dot(coord, coord);
-				lowp float mask = 1.0 - coord2 * vignette_intensity * 0.1;
+				noise = (noise - 0.5) * noise_intensity;
 
-				noise = (noise * 2.0 - 1.0) * noise_intensity;
-
-				gl_FragColor = mix(source, blur, min(blur_amount * coord2, 1.0)) * mask + noise;
+				gl_FragColor =
+					mix(source, blur, min(blur_amount * grad, 1.0)) * (1.0 - grad * vignette_intensity) +
+					vec4(noise, noise, noise, noise);
 			}
 			#endif
 

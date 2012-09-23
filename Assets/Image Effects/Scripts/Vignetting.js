@@ -5,13 +5,14 @@
 @script AddComponentMenu("Image Effects/Vignetting")
 
 class Vignetting extends PostEffectsBase {
-    @Range(0.0, 6.0) var vignetteIntensity = 0.375;
+    @Range(0.0, 1.5) var vignetteIntensity = 0.375;
     @Range(0.0, 1.5) var blurAmount = 0.1;
     @Range(0.0, 4.0) var blurSpread = 1.5;
     @Range(0.0, 1.0) var noiseIntensity = 0.2;
     @Range(0.25, 1.5) var noiseScale = 1.0;
 
     @HideInInspector var shader : Shader;
+    @HideInInspector var gradTexture : Texture2D;
     @HideInInspector var noiseTexture : Texture2D;
 
     private var material : Material;
@@ -49,6 +50,7 @@ class Vignetting extends PostEffectsBase {
         Graphics.Blit(quarter2, quarter1, material, 1);
 
         material.SetTexture("blur_texture", quarter1);
+        material.SetTexture("grad_texture", gradTexture);
         material.SetTexture("noise_texture", noiseTexture);
         material.SetVector("noise_uvmod", uvmod);
         material.SetFloat("vignette_intensity", vignetteIntensity);
