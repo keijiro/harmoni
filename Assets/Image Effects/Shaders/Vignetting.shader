@@ -52,15 +52,18 @@ Shader "Hidden/Vignetting" {
 			uniform sampler2D _MainTex;
 			uniform vec4 offsets;
 			varying vec2 uv;
-			varying vec4 delta[3];
+			varying vec2 delta[6];
 
 			#ifdef VERTEX
 			void main() {
 	            gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 				uv = gl_MultiTexCoord0.xy;
-				delta[0] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(1, 1, -1, -1);
-				delta[1] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(2, 2, -2, -2);
-				delta[2] = gl_MultiTexCoord0.xyxy + offsets.xyxy * vec4(3, 3, -3, -3);
+				delta[0] = gl_MultiTexCoord0.xy + offsets.xy * vec2( 1,  1);
+				delta[1] = gl_MultiTexCoord0.xy + offsets.xy * vec2(-1, -1);
+				delta[2] = gl_MultiTexCoord0.xy + offsets.xy * vec2( 2,  2);
+				delta[3] = gl_MultiTexCoord0.xy + offsets.xy * vec2(-2, -2);
+				delta[4] = gl_MultiTexCoord0.xy + offsets.xy * vec2( 3,  3);
+				delta[5] = gl_MultiTexCoord0.xy + offsets.xy * vec2(-3, -3);
 			}
 			#endif
 
@@ -68,12 +71,12 @@ Shader "Hidden/Vignetting" {
 			void main() {
 				gl_FragColor =
 					0.4  * texture2D(_MainTex, uv) +
-					0.15 * texture2D(_MainTex, delta[0].xy) +
-					0.15 * texture2D(_MainTex, delta[0].zw) +
-					0.1  * texture2D(_MainTex, delta[1].xy) +
-					0.1  * texture2D(_MainTex, delta[1].zw) +
-					0.05 * texture2D(_MainTex, delta[2].xy) +
-					0.05 * texture2D(_MainTex, delta[2].zw);
+					0.15 * texture2D(_MainTex, delta[0]) +
+					0.15 * texture2D(_MainTex, delta[1]) +
+					0.1  * texture2D(_MainTex, delta[2]) +
+					0.1  * texture2D(_MainTex, delta[3]) +
+					0.05 * texture2D(_MainTex, delta[4]) +
+					0.05 * texture2D(_MainTex, delta[5]);
 			}
 			#endif
 
