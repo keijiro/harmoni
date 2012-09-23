@@ -2,32 +2,53 @@
 
 @script RequireComponent(SynthController)
 
-var interval = 4;
-
-@Range(0.003, 1.0)  var env_atk = 0.003;
-@Range(0.003, 1.0)  var env_rel = 0.2;
-
-private var envelope = Envelope();
 private var touch = 2.0;
 
 function Start() {
     var synth = GetComponent.<SynthController>();
     var noise = FindObjectOfType(NoiseController) as NoiseController;
-
-    var scale = MusicalScale(41 + 12 * 3);
-    var prevNote = -1;
+    var keyboard = FindObjectOfType(TouchKeyboard) as TouchKeyboard;
+    var envelope = Envelope();
 
     while (true) {
         while (touch > 0.0) yield;
 
-        envelope.amplifier = 0.0;
+        if (keyboard.lastNote < 45 && keyboard.lastNote > 0) {
+            // Bass mode.
+            var scale = MusicalScale(41, 1);
+            var interval = 512;
+            var restOnSameNote = false;
+            var range = 16;
+            envelope.attack = 4.0;
+            envelope.release = 4.0;
+        } else if (keyboard.lastNote > 100) {
+            // Noisy seq. mode.
+            scale = MusicalScale(41 + 12 * 4, 1);
+            interval = 8;
+            range = 16;
+            restOnSameNote = false;
+            envelope.attack = 0.004;
+            envelope.release = 0.02;
+        } else {
+            // Melody mode.
+            scale = MusicalScale(41 + 12 * 3, 0);
+            interval = 16;
+            range = 24;
+            restOnSameNote = true;
+            envelope.attack = 0.08;
+            envelope.release = 0.14;
+        }
+
         var time = Random.Range(-10.0, 10.0);
+        var prevNote = -1;
+
+        envelope.amplifier = 0.0;
 
         while (touch <= 0.0) {
-            envelope.amplifier = Mathf.Min(envelope.amplifier + 0.005, 0.7);
+            envelope.amplifier = Mathf.Min(envelope.amplifier + 0.001 * interval, 0.7);
 
-            var note = scale.GetNote(Perlin.Fbm(time, 4) * 24);
-            if (note != prevNote) {
+            var note = scale.GetNote(Perlin.Fbm(time, 4) * range);
+            if (note != prevNote || !restOnSameNote) {
                 synth.KeyOn(note, envelope);
                 prevNote = note;
             }
@@ -41,9 +62,6 @@ function Start() {
 }
 
 function Update() {
-    envelope.attack = env_atk;
-    envelope.release = env_rel;
-
     if (Input.GetMouseButton(0)) {
         touch = 5.0;
     } else {
