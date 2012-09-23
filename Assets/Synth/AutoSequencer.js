@@ -24,6 +24,7 @@ function Start() {
         while (touch > 0.0) yield;
 
         envelope.amplifier = 0.0;
+        time = Random.Range(-10.0, 10.0);
 
         while (touch <= 0.0) {
             envelope.amplifier = Mathf.Min(envelope.amplifier + 0.005, 0.7);
@@ -35,7 +36,7 @@ function Start() {
             }
 
             noise.KeyOn(envelope.amplifier);
-            time += 0.1713;
+            time += Random.Range(0.1, 0.2);
 
             yield WaitForSeconds(1.0 / 60 * interval);
         }
