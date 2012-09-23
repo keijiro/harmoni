@@ -117,13 +117,13 @@ Shader "Hidden/Vignetting" {
 				lowp vec4 source = texture2D(_MainTex, uv[0]);
 				lowp vec4 blur = texture2D(blur_texture, uv[0]);
 				lowp float grad = texture2D(grad_texture, uv[0]).w;
-				lowp float noise = texture2D(noise_texture, uv[1]).w;
+				lowp vec4 noise = texture2D(noise_texture, uv[1]).wwww;
 
+				source = mix(source, blur, min(blur_amount * grad, 1.0));
+				source *= 1.0 - grad * vignette_intensity;
 				noise = (noise - 0.5) * noise_intensity;
 
-				gl_FragColor =
-					mix(source, blur, min(blur_amount * grad, 1.0)) * (1.0 - grad * vignette_intensity) +
-					vec4(noise, noise, noise, noise);
+				gl_FragColor = source + noise;
 			}
 			#endif
 
@@ -161,13 +161,12 @@ Shader "Hidden/Vignetting" {
 			void main() {
 				lowp vec4 source = texture2D(_MainTex, uv[0]);
 				lowp float grad = texture2D(grad_texture, uv[0]).w;
-				lowp float noise = texture2D(noise_texture, uv[1]).w;
+				lowp vec4 noise = texture2D(noise_texture, uv[1]).wwww;
 
+				source *= 1.0 - grad * vignette_intensity;
 				noise = (noise - 0.5) * noise_intensity;
 
-				gl_FragColor =
-					source * (1.0 - grad * vignette_intensity) +
-					vec4(noise, noise, noise, noise);
+				gl_FragColor = source + noise;
 			}
 			#endif
 

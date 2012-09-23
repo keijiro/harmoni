@@ -16,10 +16,12 @@ function Start() {
         AudioSettings.SetDSPBufferSize(512, 4);
         AudioSettings.outputSampleRate = SynthConfig.kSampleRate = 22050;
         Application.targetFrameRate = 30;
+        Shader.globalMaximumLOD = 200;
     } else {
         AudioSettings.SetDSPBufferSize(256, 4);
 	    AudioSettings.outputSampleRate = SynthConfig.kSampleRate = 44100;
         Application.targetFrameRate = 60;
+        Shader.globalMaximumLOD = 400;
     }
 
     yield;
