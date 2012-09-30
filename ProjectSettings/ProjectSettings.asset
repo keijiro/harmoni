@@ -87,6 +87,8 @@ PlayerSettings:
   iPhoneSplashScreen: {fileID: 2800000, guid: efdce04b4991e4883885512a0db421b5, type: 3}
   iPhoneHighResSplashScreen: {fileID: 2800000, guid: efdce04b4991e4883885512a0db421b5,
     type: 3}
+  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 329c39670dc6547de96d13964a5da663,
+    type: 3}
   iPadPortraitSplashScreen: {fileID: 2800000, guid: 7420e4486d3134943ab58b9fdc493054,
     type: 3}
   iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 7420e4486d3134943ab58b9fdc493054,
@@ -138,6 +140,7 @@ PlayerSettings:
   XboxDeployKinectResources: 0
   XboxSplashScreen: {fileID: 0}
   xboxEnableSpeech: 0
+  xboxAdditionalTitleMemorySize: 0
   ps3TitleConfigPath: 
   ps3DLCConfigPath: 
   ps3ThumbnailPath: 
