@@ -309,10 +309,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 652960823}
-  - 82: {fileID: 652960824}
-  - 114: {fileID: 652960829}
-  - 114: {fileID: 652960825}
   - 114: {fileID: 652960827}
+  - 114: {fileID: 652960825}
+  - 114: {fileID: 652960829}
+  - 82: {fileID: 652960824}
   - 166: {fileID: 652960828}
   - 164: {fileID: 652960830}
   - 168: {fileID: 652960826}
@@ -400,6 +400,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 063fb88c6ae04433fa81ee0ada147341, type: 3}
   m_Name: 
+  mode: 1
 --- !u!168 &652960826
 AudioEchoFilter:
   m_ObjectHideFlags: 0
@@ -423,7 +424,8 @@ MonoBehaviour:
   m_Name: 
   env_atk: 1
   env_rel: 1
-  lastNote: -1
+  noteRange: 32
+  barMaterial: {fileID: 2100000, guid: c293ca01848104f72b84c9255d249a13, type: 2}
 --- !u!166 &652960828
 AudioChorusFilter:
   m_ObjectHideFlags: 0
