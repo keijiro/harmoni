@@ -22,7 +22,7 @@ http://keijiro.github.com/harmoni
 Acknowledgements
 ----------------
 
-Big thank goes to:
+Big thanks goes to:
 
 - Simplex noise functions are (C) Ashima Arts
 - Classic noise functions are (C) Stefan Gustavson
