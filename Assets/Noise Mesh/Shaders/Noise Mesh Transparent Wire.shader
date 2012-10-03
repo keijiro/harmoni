@@ -22,7 +22,7 @@ Shader "Custom/Noise Wire" {
 
          attribute vec4 Tangent;
 
-         #include "classicnoise3D.glslinc"
+         #include "webgl-noise/classicnoise3D.glslinc"
 
          float fbm(vec3 coord) {
             return
@@ -79,7 +79,7 @@ Shader "Custom/Noise Wire" {
 
          attribute vec4 Tangent;
 
-         #include "classicnoise3D.glslinc"
+         #include "webgl-noise/classicnoise3D.glslinc"
 
          float fbm(vec3 coord) {
             return
