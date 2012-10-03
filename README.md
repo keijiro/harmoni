@@ -18,3 +18,13 @@ Support
 -------
 
 http://keijiro.github.com/harmoni
+
+Acknowledgements
+----------------
+
+Big thank goes to:
+
+- Simplex noise functions are (C) Ashima Arts
+- Classic noise functions are (C) Stefan Gustavson
+
+For details, see https://github.com/ashima/webgl-noise
