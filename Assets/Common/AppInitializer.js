@@ -1,6 +1,7 @@
 #pragma strict
 
 function Start() {
+#if UNITY_IPHONE
     if (SystemInfo.processorCount == 1) {
         QualitySettings.SetQualityLevel(0);
     } else if (SystemInfo.deviceModel.StartsWith("iPad2") ||
@@ -9,8 +10,6 @@ function Start() {
     } else {
         QualitySettings.SetQualityLevel(2);
     }
-
-    yield;
 
     if (QualitySettings.GetQualityLevel() == 0) {
         AudioSettings.SetDSPBufferSize(512, 4);
@@ -23,8 +22,14 @@ function Start() {
         Application.targetFrameRate = 60;
         Shader.globalMaximumLOD = 400;
     }
+#endif
+
+#if UNITY_ANDROID
+    QualitySettings.SetQualityLevel(1);
+    SynthConfig.kSampleRate = AudioSettings.outputSampleRate;
+    Shader.globalMaximumLOD = 400;
+#endif
 
     yield;
-
     Application.LoadLevel(1);
 }
